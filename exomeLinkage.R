@@ -1,6 +1,21 @@
 library(data.table)
 
-my.ped <- read.csv('pedigree_details.csv')
+# my.ped <- read.csv('pedigree_details.csv')
+
+params <- readLines(n=3,ok=FALSE)
+# testName
+# vcfFile
+# pedFile
+
+testName <- params[1]
+vcfFile <- params[2]
+pedFile <- params[3]
+
+testName
+pedFile
+exit()
+
+
 rownames(my.ped) <- my.ped$ID
 
 #geno <- read.csv('tony-variants_imputed.csv',check.names=FALSE)
