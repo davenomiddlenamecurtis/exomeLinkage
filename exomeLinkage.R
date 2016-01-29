@@ -2,7 +2,11 @@ library(data.table)
 
 # my.ped <- read.csv('pedigree_details.csv')
 
-params <- readLines(n=3,ok=FALSE)
+fileName <- "el.arg"
+conn <- file(fileName,open="r")
+# params <- readLines(conn)
+params <- readLines(conn,n=3,ok=FALSE)
+close(conn)
 # testName
 # vcfFile
 # pedFile
@@ -11,9 +15,10 @@ testName <- params[1]
 vcfFile <- params[2]
 pedFile <- params[3]
 
+params
 testName
 pedFile
-exit()
+q()
 
 
 rownames(my.ped) <- my.ped$ID
