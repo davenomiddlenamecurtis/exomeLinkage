@@ -14,10 +14,9 @@ vcfPrefix=/cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr
 # chrs="1 2 22"
 chrs="9"
 
-allchr=$(chrs)
-for c in $allchr
+for c in $chrs
 do
-	chr=`printf "%02d" $c
+	chr=`printf "%02d" $c`
 	echo Input_Format_Type=6 > mega2.$chr.inp
 	echo Input_Pedigree_File=$famFile >> mega2.$chr.inp
 	echo Input_Aux_File=$vcfPrefix$c.vcf.gz >> mega2.$chr.inp
