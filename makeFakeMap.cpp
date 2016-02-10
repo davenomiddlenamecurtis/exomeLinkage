@@ -11,8 +11,10 @@ g++ -o makeFakeMap makeFakeMap.cpp -lm
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <string>
 #include <vector>
 using namespace std;
 
