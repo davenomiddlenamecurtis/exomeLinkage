@@ -30,7 +30,7 @@ I selected compressed VCF format.
 I added --maf 0.0001 to the "Enter VCF parameters" options (as well as --remove-indels). This was to remove monomorphic variants.
 
 I made a pedigree file called jel.fam which looks like this:
-
+```
 jel	J13		J11	J12	2	2
 
 jel	VIII9	J11	J12	2	2
@@ -50,7 +50,7 @@ jel	J10		J8	V9	1	1
 jel J8		0	0	1	2
 
 jel	V9		0	0	2	1
-
+```
 If a subject is not in the vcf file it will be given unknown genotypes. Subjects in the vcf file not in the pedigree file will be ignored.
 
 I used default penetrance values but it will be better so specify a penetrance file.
