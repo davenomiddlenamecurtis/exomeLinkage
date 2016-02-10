@@ -20,9 +20,9 @@ On the CS cluster at UCL enter this to get g++ 4.7.2:
 scl enable devtoolset-1.1 bash
 
 When I did the default build mega2 would crash when trying to index a vcf file. I built the debug version and this ran fine. To build the debug version, in the srcdir folder enter:
-
+```
 make dbg
-
+```
 This gave me an executable called mega2_linux
 
 I selected compressed VCF format.
@@ -64,3 +64,5 @@ I selected option to Create Merlin model file.
 I entered "1 e" for the R plot statistic selection menu.
 
 At present it creates the analysis files in a unique, time-stamped folder. This makes it hard to write a script to automate the process. I am looking into it. There is a variable called CreateRunFolder and originally one could set it to 0 by providing the argument -nosave, however this is commented out. (In mega2.cpp.) It is used in utils.cpp and it would be trivial to edit the code to ignore this. Alternatively, a script could look in all plausible folders. But then would pick up old ones as well. We want to get control of where these files get written.
+
+
