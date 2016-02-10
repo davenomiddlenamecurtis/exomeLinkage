@@ -65,7 +65,12 @@ I entered "1 e" for the R plot statistic selection menu.
 
 I used excel to create a fake map file. I read in the one written by mega2 (all variants at position 0) and wrote out one with each variant at 0.01 from the one before. See the example.fake.map file.
 
-At present it creates the analysis files in a unique, time-stamped folder. This makes it hard to write a script to automate the process. I am looking into it. There is a variable called CreateRunFolder and originally one could set it to 0 by providing the argument -nosave, however this is commented out. (In mega2.cpp.) It is used in utils.cpp and it would be trivial to edit the code to ignore this. Alternatively, a script could look in all plausible folders. But then would pick up old ones as well. We want to get control of where these files get written.
+At present it creates the analysis files in a unique, time-stamped folder. This makes it hard to write a script to automate the process. I am looking into it. There is a variable called CreateRunFolder and originally one could set it to 0 by providing the argument -nosave, however this is commented out. (In mega2.cpp.) It is used in utils.cpp and it would be trivial to edit the code to ignore this. Alternatively, a script could capture the output from mega2 and use this to determine which folder has been created.
+
+In order to specify penetrances, one cannot use a mega2 penetrance file because it also needs a names.txt file. The best way seems to be to have a user-specified merlin model file and have it overwrite the default merlin_model file which gets created by mega2 and which looks like this:
+
+        default 0.500000 0.050000,0.900000,0.900000  default
+        
 
 Once this is all sorted I will write a script which will run mega2 on each chromosome and run the analysis for each chromosome.
 
