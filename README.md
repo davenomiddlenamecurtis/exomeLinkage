@@ -57,7 +57,7 @@ I used default penetrance values but it will be better so specify a penetrance f
 
 I set the maximum number of alleles to 256 or more. The option to set from 3-255 did not work.
 
-There is a supposed to be a way to recode the alleles to numeric. I haven't found it yet. Instead, I edited mega2 source so that all variants whose REF allele did not have length 1 were counted as indels (even if ALT was same length). Otherwise, they break merlin.
+There is a supposed to be a way to recode the alleles to numeric. I haven't found it yet. Instead, I edited mega2 source so that all variants whose REF allele did not have length 1 were counted as indels (even if ALT was same length). Otherwise, they break merlin. Looks like it's done with this: The Mega2 command line flag (--force_numeric_alleles) can be been specified to force allele recoding, if it is not necessary, but preferred by the researcher. 
 
 I selected option to Create Merlin model file.
 
