@@ -34,7 +34,9 @@ Value_Missing_Quant_On_Input=-9.000000
 Value_Missing_Affect_On_Input=-9
 Count_Genotypes=4
 Count_Halftyped=no 
-Chromosome_Single=13
+" >> mega2.$chr.inp
+	echo Chromosome_Single=$chr >> mega2.$chr.inp
+	echo "
 Traits_Combine=1 2 e
 Default_Reset_Halftype=no 
 Default_Reset_Mendelerr=yes
