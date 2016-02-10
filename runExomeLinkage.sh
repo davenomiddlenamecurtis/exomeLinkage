@@ -6,7 +6,7 @@ RFOLDER=/share/apps/R/bin
 PATH=$MERLINFOLDER:$RFOLDER:$PATH
 
 # for the user to set
-famFile=jel.fam
+famFile=/home/rejudcu/exomeLinkage/jel.fam
 modelFile=/home/rejudcu/exomeLinkage/dominant.model
 vcfPrefix=/cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr
 # e.g. /cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr13.vcf.gz
