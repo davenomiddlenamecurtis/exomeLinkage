@@ -66,7 +66,7 @@ Rplot_Statistics= 1 e
 	source setScriptName.sh
 	tempFolder=${scriptName%/*}
 	mv $tempFolder/merlin_map.$chr $tempFolder/real.merlin_map.$chr
-	$MAKEFAKEMAPBIN $tempFolder/real.merlin)map.$chr $tempFolder/merlin_map.$chr
+	$MAKEFAKEMAPBIN $tempFolder/real.merlin_map.$chr $tempFolder/merlin_map.$chr
 	cp $modelFile $tempFolder/merlin_model 
 	csh $scriptName
 
