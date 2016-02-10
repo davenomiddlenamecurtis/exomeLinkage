@@ -63,4 +63,4 @@ I selected option to Create Merlin model file.
 
 I entered "1 e" for the R plot statistic selection menu.
 
-At present it creates the analysis files in a unique, time-stamped folder. This makes it hard to write a script to automate the process. I am looking into it.
+At present it creates the analysis files in a unique, time-stamped folder. This makes it hard to write a script to automate the process. I am looking into it. There is a variable called CreateRunFolder and originally one could set it to 0 by providing the argument -nosave, however this is commented out. (In mega2.cpp.) It is used in utils.cpp and it would be trivial to edit the code to ignore this. Alternatively, a script could look in all plausible folders. But then would pick up old ones as well. We want to get control of where these files get written.
