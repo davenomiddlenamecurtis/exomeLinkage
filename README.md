@@ -1,6 +1,19 @@
 # exomeLinkage
 Carry out linkage analysis on exome sequence data
 
+This provides a system to carry out linkage analysis of exome sequence data. The typical scenario would be that one had exomse-sequenced a few members of a family with a genetic disorder and had failed to discover a causative variant. The system uses mega2 to set up the analyses and merlin to perform them. A script to automate this process is provided. 
+
+It is assumed that the data is vcf.gz files, one per chromosome.
+
+The user must create a pedigree file as described in the mega2 documentation and edit the script to point at the right executables and data files.
+
+Before using the system, mega2 and merlin must be installed and the makeFakeMap (provided) must be compiled.
+
+The script sets up a batch file for mega2 and runs it. However mega2 needs a few extra lines which are provided by a redirected input file. The default map file produced by mega2 is replaced by one created by makeFakeMap. The merlin model file is replaced by the one provided by the user. Then the script run merlin is executed. This is repeated for each chromosome.
+
+Further notes are below.
+
+
 Notes
 
 Use mega2 and merlin
@@ -24,6 +37,10 @@ When I did the default build mega2 would crash when trying to index a vcf file. 
 make dbg
 ```
 This gave me an executable called mega2_linux
+
+Most of the input for mega2 is written to a batch file called e.g. mega2.chr22.inp.
+
+mega2 creates a new working directory each time. The script has to parse the output of mega2 to find the name of this directory.
 
 I selected compressed VCF format.
 
@@ -53,6 +70,8 @@ jel	V9		0	0	2	1
 ```
 If a subject is not in the vcf file it will be given unknown genotypes. Subjects in the vcf file not in the pedigree file will be ignored.
 
+The vcf files should be numbered with 1 2 3 ... 22 but mega2 uses 01 02 03 ... 22. We haven't tried with X yet.
+
 I set the maximum number of alleles to 256 or more. The option to set from 3-255 did not work.
 
 I used  Mega2 command line flag --force_numeric_alleles) so long alleles do not break merlin.
@@ -61,10 +80,10 @@ I selected option to Create Merlin model file.
 
 I entered "1 e" for the R plot statistic selection menu.
 
-I used excel to create a fake map file. I read in the one written by mega2 (all variants at position 0) and wrote out one with each variant at 0.01 from the one before. See the example.fake.map file.
-
 In order to specify penetrances, one cannot use a mega2 penetrance file because it also needs a names.txt file. The best way seems to be to have a user-specified merlin model file and have it overwrite the default merlin_model file which gets created by mega2 and which looks like this:
 
-        default 0.500000 0.050000,0.900000,0.900000  default
+        default 0.00100 0.050000,0.900000,0.900000  default
         
-This is all now implemented in the script. Just need to compile makeFakeMap.cpp and specify the locations of executables and data files.
+To compile makeFakeMap:
+
+g++ -o makeFakeMap makeFakeMap.cpp -lm
