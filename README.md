@@ -76,7 +76,7 @@ The vcf files should be numbered with 1 2 3 ... 22 but mega2 uses 01 02 03 ... 2
 
 I set the maximum number of alleles to 256 or more. The option to set from 3-255 did not work.
 
-I used  Mega2 command line flag --force_numeric_alleles) so long alleles do not break merlin.
+I used  Mega2 command line flag --force_numeric_alleles so long alleles do not break merlin.
 
 I selected option to Create Merlin model file.
 
