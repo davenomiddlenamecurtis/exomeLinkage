@@ -12,7 +12,7 @@ vcfPrefix=/cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr
 # e.g. /cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr13.vcf.gz
 
 # chrs="1 2 22"
-chrs="9"
+chrs="8"
 
 for c in $chrs
 do
