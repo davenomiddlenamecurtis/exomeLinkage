@@ -1,7 +1,7 @@
 # exomeLinkage
 Carry out linkage analysis on exome sequence data
 
-This provides a system to carry out linkage analysis of exome sequence data. The typical scenario would be that one had exomse-sequenced a few members of a family with a genetic disorder and had failed to discover a causative variant. The system uses mega2 to set up the analyses and merlin to perform them. A script to automate this process is provided. 
+This provides a system to carry out linkage analysis of exome sequence data. The typical scenario would be that one had exome-sequenced a few members of a family with a genetic disorder and had failed to discover a causative variant. The system uses mega2 to set up the analyses and merlin to perform them. A script to automate this process is provided. 
 
 If you use this, please be sure to appropriately acknowledge/cite the authors of mega2 and merlin.
 
