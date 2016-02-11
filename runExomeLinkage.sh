@@ -8,14 +8,18 @@ PATH=$MERLINFOLDER:$RFOLDER:$PATH
 # for the user to set
 famFile=/home/rejudcu/exomeLinkage/jel.fam
 modelFile=/home/rejudcu/exomeLinkage/dominant.model
-vcfPrefix=/cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr
-# e.g. /cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr13.vcf.gz
+vcfPrefix=/home/rejudcu/exomeLinkage/exomes/chr
+# e.g. /home/rejudcu/exomeLinkage/exomes/chr13.vcf.gz
 
-chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
+# chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
+chrs="22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 "
+# small ones first to check it works OK
 # chrs="9"
 
 for c in $chrs
 do
+	date
+	echo Starting on chromosome $c
 	chr=`printf "%02d" $c`
 	echo Input_Format_Type=6 > mega2.$chr.inp
 	echo Input_Pedigree_File=$famFile >> mega2.$chr.inp
