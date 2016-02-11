@@ -11,8 +11,8 @@ modelFile=/home/rejudcu/exomeLinkage/dominant.model
 vcfPrefix=/cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr
 # e.g. /cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr13.vcf.gz
 
-# chrs="1 2 22"
-chrs="9"
+chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
+# chrs="9"
 
 for c in $chrs
 do
