@@ -16,23 +16,25 @@ The runExomeLinkage.sh script sets up a batch file for mega2 and runs it. Howeve
 Further notes are below.
 
 
-Notes
+## Notes
 
 Use mega2 and merlin
 
 Download mega2 from here:
 
-https://watson.hgen.pitt.edu/register/ 
+(https://watson.hgen.pitt.edu/register/)
 
 Documentation for mega2 here:
 
-https://watson.hgen.pitt.edu/docs/mega2_html/mega2.html
+(https://watson.hgen.pitt.edu/docs/mega2_html/mega2.html)
 
 To compile mega2 you need a modern C++ compiler because it has "lamdas" in the code.
 
 On the CS cluster at UCL enter this to get g++ 4.7.2:
 
+```
 scl enable devtoolset-1.1 bash
+```
 
 When I did the default build mega2 would crash when trying to index a vcf file. I built the debug version and this ran fine. To build the debug version, in the srcdir folder enter:
 ```
