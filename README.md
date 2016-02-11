@@ -3,13 +3,15 @@ Carry out linkage analysis on exome sequence data
 
 This provides a system to carry out linkage analysis of exome sequence data. The typical scenario would be that one had exomse-sequenced a few members of a family with a genetic disorder and had failed to discover a causative variant. The system uses mega2 to set up the analyses and merlin to perform them. A script to automate this process is provided. 
 
+If you use this, please be sure to appropriately acknowledge/cite the authors of mega2 and merlin.
+
 It is assumed that the data is vcf.gz files, one per chromosome.
 
-The user must create a pedigree file as described in the mega2 documentation and edit the script to point at the right executables and data files.
+The user must create a pedigree file as described in the mega2 documentation and edit the runExomeLinkage.sh script to point at the right executables and data files.
 
-Before using the system, mega2 and merlin must be installed and the makeFakeMap (provided) must be compiled.
+Before using the system, mega2 and merlin must be installed and makeFakeMap (provided) must be compiled.
 
-The script sets up a batch file for mega2 and runs it. However mega2 needs a few extra lines which are provided by a redirected input file. The default map file produced by mega2 is replaced by one created by makeFakeMap. The merlin model file is replaced by the one provided by the user. Then the script run merlin is executed. This is repeated for each chromosome.
+The runExomeLinkage.sh script sets up a batch file for mega2 and runs it. However mega2 needs a few extra lines which are provided by a redirected input file. The default map file produced by mega2 is replaced by one created by makeFakeMap. The merlin model file is replaced by the one provided by the user. Then the script to run merlin is executed. This is repeated for each chromosome.
 
 Further notes are below.
 
