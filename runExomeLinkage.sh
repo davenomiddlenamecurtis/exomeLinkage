@@ -6,9 +6,9 @@ source parameters.sh
 
 for c in $chrs
 do
-	date
-	echo Starting on chromosome $c
-	chr=`printf "%02d" $c`
+    date
+    echo Starting on chromosome $c
+    chr=`printf "%02d" $c`
     echo "
 Input_Format_Type=6
 Input_Pedigree_File=$famFile
@@ -40,11 +40,10 @@ Rplot_Statistics= 1 e
 0
 0
 " > mega2.finish 
-echo $MEGA2  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
-$MEGA2  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
-# now will need to parse output
-	gotit=no
-#  5) C-shell script name:                 2016-2-10-19-15/merlin.13.sh   [new]
+    echo $MEGA2  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
+    $MEGA2  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
+    # now will need to parse output
+    #  5) C-shell script name:                 2016-2-10-19-15/merlin.13.sh   [new]
     scriptName=`grep -m1 C-shell mega2.$chr.out | cut -d: -f2 | awk '{print $1}'`
     DIR=`dirname $scriptName`
     BASE=`basename $scriptName`
@@ -52,9 +51,11 @@ $MEGA2  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
     ln -sf $DIR current
     scriptName="current/$BASE"
     echo $scriptName
-	cp current/merlin_map.$chr current/real.merlin_map.$chr
-	$MAKEFAKEMAPBIN current/real.merlin_map.$chr current/merlin_map.$chr
-	cp $modelFile current/merlin_model 
+    cp current/merlin_map.$chr current/real.merlin_map.$chr
+    $MAKEFAKEMAPBIN current/real.merlin_map.$chr current/merlin_map.$chr
+    cp $modelFile current/merlin_model 
     echo now will execute $scriptName
-	csh $scriptName
+    csh $scriptName
 done
+
+
