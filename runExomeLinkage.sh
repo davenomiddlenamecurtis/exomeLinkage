@@ -6,13 +6,13 @@ RFOLDER=/share/apps/R/bin
 PATH=$MERLINFOLDER:$RFOLDER:$PATH
 
 # for the user to set
-famFile=/home/rejudcu/exomeLinkage/jel.fam
+famFile=exome-pedigree.fam
 modelFile=/home/rejudcu/exomeLinkage/dominant.model
 vcfPrefix=/cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr
 # e.g. /cluster/project8/vyp/pontikos/People/PetraLiskova/exomes/chr13.vcf.gz
 
 #chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
-chrs="8"
+chrs="22"
 
 for c in $chrs
 do
@@ -50,7 +50,7 @@ Rplot_Statistics= 1 e
 0
 0
 " >> mega2.finish 
-	$MEGA2BIN  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
+$MEGA2BIN  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
 
 # now will need to parse output
 	gotit=no
