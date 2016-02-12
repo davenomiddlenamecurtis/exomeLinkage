@@ -48,6 +48,7 @@ Rplot_Statistics= 1 e
     DIR=`dirname $scriptName`
     BASE=`basename $scriptName`
     echo ln -sf $DIR current
+    rm -f current
     ln -sf $DIR current
     scriptName="current/$BASE"
     echo $scriptName
@@ -55,7 +56,8 @@ Rplot_Statistics= 1 e
     $MAKEFAKEMAPBIN current/real.merlin_map.$chr current/merlin_map.$chr
     cp $modelFile current/merlin_model 
     echo now will execute $scriptName
-    csh $scriptName
+    csh $scriptName > chr$c.out
+    rm -f current
 done
 
 
