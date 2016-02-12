@@ -90,4 +90,32 @@ In order to specify penetrances, one cannot use a mega2 penetrance file because 
         
 To compile makeFakeMap:
 
+```
 g++ -o makeFakeMap makeFakeMap.cpp -lm
+```
+
+The ```parameters.sh``` file is sourced by ```runExomeLinkage.sh```.
+The file looks like this:
+```
+# for the user to set
+#famFile=exome-pedigree.fam
+famFile=jel.fam
+modelFile=/home/rejudcu/exomeLinkage/dominant.model
+vcfPrefix=../chr
+# e.g. /home/rejudcu/exomeLinkage/exomes/chr13.vcf.gz
+chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
+MEGA2=/home/rejudcu/mega2/mega2_v4.8.2_src/srcdir/mega2_linux
+MAKEFAKEMAPBIN=/home/rejudcu/exomeLinkage/makeFakeMap
+MERLINFOLDER=/cluster/project8/vyp/AdamLevine/software/merlin
+RFOLDER=/share/apps/R/bin
+MEGA2_BIN=/home/rejudcu/mega2/bin
+PATH=scripts/:$MERLINFOLDER:$RFOLDER:$MEGA2_BIN:$PATH
+````
+
+In order for mega2 to run properly the python script ```RMerlin.py``` was copied to ```scripts``` and modified to call the right interpreter:
+```
+#! /share/apps/python/bin/python
+```
+
+Finally, the script creates plots with the LOD scores.
+
