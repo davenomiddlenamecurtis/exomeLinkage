@@ -1,33 +1,18 @@
 # constants for executable names and folders
-MEGA2=/home/rejudcu/mega2/mega2_v4.8.2_src/srcdir/mega2_linux
-MAKEFAKEMAPBIN=/home/rejudcu/exomeLinkage/makeFakeMap
-MERLINFOLDER=/cluster/project8/vyp/AdamLevine/software/merlin
-RFOLDER=/share/apps/R/bin
-MEGA2_BIN=/home/rejudcu/mega2/bin
-PATH=$MERLINFOLDER:$RFOLDER:$MEGA2_BIN:$PATH
+set -x
+set -u
 
-# for the user to set
-famFile=exome-pedigree.fam
-modelFile=/home/rejudcu/exomeLinkage/dominant.model
-vcfPrefix=/home/rejudcu/exomeLinkage/exomes/chr
-# e.g. /home/rejudcu/exomeLinkage/exomes/chr13.vcf.gz
-
-#chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
-chrs="22"
-# chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
-#chrs="22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 "
-# small ones first to check it works OK
-# chrs="9"
+source parameters.sh
 
 for c in $chrs
 do
 	date
 	echo Starting on chromosome $c
 	chr=`printf "%02d" $c`
-	echo Input_Format_Type=6 > mega2.$chr.inp
-	echo Input_Pedigree_File=$famFile >> mega2.$chr.inp
-	echo Input_Aux_File=$vcfPrefix$c.vcf.gz >> mega2.$chr.inp
-	echo "
+    echo "
+Input_Format_Type=6
+Input_Pedigree_File=$famFile
+Input_Aux_File=${vcfPrefix}${c}.vcf.gz
 Output_Path=.
 Input_Path=.
 PLINK_Args= --missing-phenotype -9 --trait default
@@ -41,40 +26,35 @@ Value_Missing_Quant_On_Input=-9.000000
 Value_Missing_Affect_On_Input=-9
 Count_Genotypes=4
 Count_Halftyped=no 
-" >> mega2.$chr.inp
-	echo Chromosome_Single=$chr >> mega2.$chr.inp
-	echo "
+Chromosome_Single=$chr
 Traits_Combine=1 2 e
 Default_Reset_Halftype=no 
 Default_Reset_Mendelerr=yes
 Default_Reset_Alleleerr=no 
 Default_Set_Uniq=no 
 Rplot_Statistics= 1 e
-" >> mega2.$chr.inp
+" > mega2.$chr.inp
 	echo "
 2
 0
 0
 0
-" >> mega2.finish 
+" > mega2.finish 
+echo $MEGA2  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
 $MEGA2  --force_numeric_alleles mega2.$chr.inp < mega2.finish  > mega2.$chr.out
-
 # now will need to parse output
 	gotit=no
 #  5) C-shell script name:                 2016-2-10-19-15/merlin.13.sh   [new]
-	fgrep C-shell mega2.$chr.out | while read num cshell script name scriptName new
-	do
-		if [ $gotit = no ]
-		then
-			gotit=yes
-			echo scriptName=$scriptName > setScriptName.sh
-		fi
-	done
-	source setScriptName.sh
-	tempFolder=${scriptName%/*}
-	mv $tempFolder/merlin_map.$chr $tempFolder/real.merlin_map.$chr
-	$MAKEFAKEMAPBIN $tempFolder/real.merlin_map.$chr $tempFolder/merlin_map.$chr
-	cp $modelFile $tempFolder/merlin_model 
+    scriptName=`grep -m1 C-shell mega2.$chr.out | cut -d: -f2 | awk '{print $1}'`
+    DIR=`dirname $scriptName`
+    BASE=`basename $scriptName`
+    echo ln -sf $DIR current
+    ln -sf $DIR current
+    scriptName="current/$BASE"
+    echo $scriptName
+	cp current/merlin_map.$chr current/real.merlin_map.$chr
+	$MAKEFAKEMAPBIN current/real.merlin_map.$chr current/merlin_map.$chr
+	cp $modelFile current/merlin_model 
+    echo now will execute $scriptName
 	csh $scriptName
-
 done
