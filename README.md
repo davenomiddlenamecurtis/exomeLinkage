@@ -1,4 +1,5 @@
 # exomeLinkage
+
 Carry out linkage analysis on exome sequence data
 
 This provides a system to carry out linkage analysis of exome sequence data. The typical scenario would be that one had exome-sequenced a few members of a family with a genetic disorder and had failed to discover a causative variant. The system uses mega2 to set up the analyses and merlin to perform them. A script to automate this process is provided. 
@@ -28,6 +29,10 @@ Documentation for mega2 here:
 
 (https://watson.hgen.pitt.edu/docs/mega2_html/mega2.html)
 
+Run the install.sh script, which sets up to do things like point at python, which must be available on your system.
+
+If you have trouble compiling mega2 then note the following.
+
 To compile mega2 you need a modern C++ compiler because it has "lamdas" in the code.
 
 On the CS cluster at UCL enter this to get g++ 4.7.2:
@@ -42,6 +47,8 @@ make dbg
 ```
 This gave me an executable called mega2_linux
 
+Once a mega2 binary has been successfully created you will need to modify the supplied script, runExomeLinkage.sh, to point at it as well as other executables and folders.
+
 Most of the input for mega2 is written to a batch file called e.g. mega2.chr22.inp.
 
 mega2 creates a new working directory each time. The script has to parse the output of mega2 to find the name of this directory.
@@ -50,31 +57,22 @@ I selected compressed VCF format.
 
 I added --maf 0.0001 to the "Enter VCF parameters" options (as well as --remove-indels). This was to remove monomorphic variants.
 
-I made a pedigree file called jel.fam which looks like this (without blank lines):
+I made a pedigree file called jel.fam which looks like this:
 ```
 jel	J13		J11	J12	2	2
-
 jel	VIII9	J11	J12	2	2
-
 jel	J11		J14	J9	1	2
-
 jel	J12		0	0	2	1
-
 jel	J2		J14	J9	1	2
-
 jel	J9		J8	V9	2	2
-
 jel J14		0	0	1	1
-
 jel	J10		J8	V9	1	1
-
 jel J8		0	0	1	2
-
 jel	V9		0	0	2	1
 ```
 If a subject is not in the vcf file it will be given unknown genotypes. Subjects in the vcf file not in the pedigree file will be ignored.
 
-The vcf files should be numbered with 1 2 3 ... 22 but mega2 uses 01 02 03 ... 22. We haven't tried with X yet.
+The vcf files should be numbered with 1 2 3 ... 22 but mega2 uses 01 02 03 ... 22. We haven't tried with X yet. The supplied scripts adds 0 where necessary.
 
 I set the maximum number of alleles to 256 or more. The option to set from 3-255 did not work.
 
@@ -86,36 +84,17 @@ I entered "1 e" for the R plot statistic selection menu.
 
 In order to specify penetrances, one cannot use a mega2 penetrance file because it also needs a names.txt file. The best way seems to be to have a user-specified merlin model file and have it overwrite the default merlin_model file which gets created by mega2 and which looks like this:
 
+```
         default 0.00100 0.050000,0.900000,0.900000  default
+```
         
-To compile makeFakeMap:
+You need to compile makeFakeMap with a command like this:
 
 ```
 g++ -o makeFakeMap makeFakeMap.cpp -lm
 ```
 
-The ```parameters.sh``` file is sourced by ```runExomeLinkage.sh```.
-The file looks like this:
-```
-# for the user to set
-#famFile=exome-pedigree.fam
-famFile=jel.fam
-modelFile=/home/rejudcu/exomeLinkage/dominant.model
-vcfPrefix=../chr
-# e.g. /home/rejudcu/exomeLinkage/exomes/chr13.vcf.gz
-chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
-MEGA2=/home/rejudcu/mega2/mega2_v4.8.2_src/srcdir/mega2_linux
-MAKEFAKEMAPBIN=/home/rejudcu/exomeLinkage/makeFakeMap
-MERLINFOLDER=/cluster/project8/vyp/AdamLevine/software/merlin
-RFOLDER=/share/apps/R/bin
-MEGA2_BIN=/home/rejudcu/mega2/bin
-PATH=scripts/:$MERLINFOLDER:$RFOLDER:$MEGA2_BIN:$PATH
-````
+Once everything is installed and compiled you need to create your own pedigree file and penetrance file. Then you need to edit runMakeFile.sh to point to them and to the right files and folders on your system. 
 
-In order for mega2 to run properly the python script ```RMerlin.py``` was copied to ```scripts``` and modified to call the right interpreter:
-```
-#! /share/apps/python/bin/python
-```
-
-Finally, the script creates plots with the LOD scores.
+Good luck!
 
