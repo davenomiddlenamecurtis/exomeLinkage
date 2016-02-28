@@ -16,7 +16,8 @@ set -x
 # if you want to test for X linkage you will have to modify the scripts
 
 chrs="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22"
-chrs=22
+# chrs=22
+# use above to test just one chromosome
 
 # specify the pedigree file to use to describe the structure and phenotypes of subjects to use
 # subjects not in the vcf file will be treated as having unknown genotypes
